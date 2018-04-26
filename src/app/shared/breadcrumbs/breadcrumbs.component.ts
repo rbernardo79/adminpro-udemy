@@ -10,7 +10,7 @@ import { Title, Meta, MetaDefinition } from '@angular/platform-browser';
 export class BreadcrumbsComponent implements OnInit {
 
 
-  label: String = '';
+  label: string = '';
 
   constructor( 
     private router: Router,
