@@ -51,8 +51,7 @@ export class ProfileComponent implements OnInit {
 
     let urlImagenTemp = reader.readAsDataURL ( archivo ); 
 
-    console.log ( urlImagenTemp );
-
+    
     reader.onloadend = () => this.imagenTemp = reader.result;
   }
 

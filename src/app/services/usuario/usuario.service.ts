@@ -17,7 +17,7 @@ export class UsuarioService {
 
   constructor( public http: HttpClient, public router: Router, public _subirArchivo: SubirArchivoService) { 
     this.cargarStorage ();
-    console.log ('Servicio de usuario listo');
+   // console.log ('Servicio de usuario listo');
 
   }
 
@@ -83,6 +83,7 @@ export class UsuarioService {
     return this.http.post ( url, usuario )
           .map ( (resp: any) => {
 
+            console.log ( resp.token );
 
             this.guardarStorage (resp.id, resp.token, resp.usuario);
 
@@ -114,8 +115,10 @@ export class UsuarioService {
     return this.http.put ( url, usuario )
     .map ( (resp: any) => {
 
-      
-      this.guardarStorage (resp.usuario._id, this.token, resp.usuario);
+      if ( usuario._id === this.usuario._id ) {
+        this.guardarStorage (resp.usuario._id, this.token, resp.usuario);
+      }
+
       swal('Usuario actualizado', usuario.nombre, 'success');
 
 
@@ -142,5 +145,38 @@ export class UsuarioService {
 
     
   }
+
+  cargarUsuarios (desde: number = 0) {
+  
+    let url = URL_SERVICIOS + '/usuario?desde=' + desde;
+    return this.http.get(url);
+
+  }
+
+  buscarUsuario (termino: string) {
+
+    let url = URL_SERVICIOS + '/busqueda/coleccion/usuarios/' + termino;
+    return this.http.get(url)
+        .map( (resp: any) => resp.usuarios );
+
+  }
+
+  borrarUsuario (id: string) {
+
+    console.log(id);
+    console.log(this.token);
+
+     let url = URL_SERVICIOS + '/usuario/' + id;
+    url += '?token=' + this.token;
+    console.log(url);
+    return this.http.delete ( url )
+        .map ( resp => {
+            swal('Usuario borrado', 'El usuario ha sido eliminado correctamente', 'success');
+            return true;
+        });
+
+  }
+
+
 
 }

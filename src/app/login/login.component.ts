@@ -58,7 +58,7 @@ oauth2: any;
       this._usuarioService.loginGoogle (token)
           .subscribe( () => window.location.href = '#/dashboard'  );
 
-      console.log (token);
+      // console.log (token);
 
       // console.log(profile);
 
@@ -74,8 +74,8 @@ oauth2: any;
 
     let usuario = new Usuario(null, forma.value.email, forma.value.password);
 
-    console.log ( forma.valid );
-    console.log ( forma.value );
+    // console.log ( forma.valid );
+    // console.log ( forma.value );
 
     this._usuarioService.login (usuario, forma.value.recuerdame)
           .subscribe ( resp => this.router.navigate(['/dashboard']) );
