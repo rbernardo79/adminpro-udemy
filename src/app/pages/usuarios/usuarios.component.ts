@@ -105,7 +105,6 @@ borrarUsuario( usuario: Usuario ) {
 
       this._usuarioService.borrarUsuario(usuario._id)
         .subscribe( resp => {
-          console.log (resp);
           this.cambiarDesde(0);
           this.cargarUsuarios();
         });
@@ -116,8 +115,6 @@ borrarUsuario( usuario: Usuario ) {
 }
 
 guardarUsuario ( usuario: Usuario) {
-
-  console.log ("llega");
 
   this._usuarioService.actualizarUsuario ( usuario )
     .subscribe();
